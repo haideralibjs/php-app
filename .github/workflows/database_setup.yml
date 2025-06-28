@@ -10,20 +10,17 @@ jobs:
     steps:
       - name: Install MySQL
         run: |
-          sudo yum update -y
-          sudo yum install -y mysql-server
+         sudo yum install -y wget
+         wget https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+         sudo rpm -Uvh mysql80-community-release-el7-5.noarch.rpm
+         sudo yum install -y mysql-community-server
 
-      - name: Start and enable MySQL
-        run: |
-          sudo systemctl start mysqld
-          sudo systemctl enable mysqld
-
-      - name: Set MySQL root password
-        run: |
-          # Wait to make sure mysql is ready
-          sleep 5
-          sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL_ROOT_PASSWORD }}'; FLUSH PRIVILEGES;"
-
+         sudo systemctl start mysqld
+         sudo systemctl enable mysqld
+         sleep 5
+         TEMP_PASS=$(sudo grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
+         mysql -u root -p"$TEMP_PASS" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL_ROOT_PASSWORD }}';"
+          
       - name: Verify MySQL installation
         run: |
           mysql -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW DATABASES;"
