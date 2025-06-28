@@ -1,9 +1,9 @@
 name: Install and Configure MySQL
 
 on:
-  push:[main]
-  workflow_dispatch:
-
+  push:
+    branches:
+      - main
 jobs:
   install-mysql:
     runs-on: self-hosted
