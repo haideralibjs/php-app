@@ -37,4 +37,4 @@ jobs:
 
       - name: Verify MySQL installation
         run: |
-          mysql -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW DATABASES;"
+          mysql -u root -p${{ secrets.MYSQL_PASSWORD }} -e "SHOW DATABASES;"
