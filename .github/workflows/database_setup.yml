@@ -1,0 +1,29 @@
+name: Install and Configure MySQL
+
+on:
+  workflow_dispatch:
+
+jobs:
+  install-mysql:
+    runs-on: self-hosted
+
+    steps:
+      - name: Install MySQL
+        run: |
+          sudo yum update -y
+          sudo yum install -y mysql-server
+
+      - name: Start and enable MySQL
+        run: |
+          sudo systemctl start mysqld
+          sudo systemctl enable mysqld
+
+      - name: Set MySQL root password
+        run: |
+          # Wait to make sure mysql is ready
+          sleep 5
+          sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL_ROOT_PASSWORD }}'; FLUSH PRIVILEGES;"
+
+      - name: Verify MySQL installation
+        run: |
+          mysql -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW DATABASES;"
