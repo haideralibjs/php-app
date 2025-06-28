@@ -11,7 +11,7 @@ jobs:
       - name: Install MySQL
         run: |
          sudo yum install -y wget
-         wget sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+         sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
          echo "h1"
          sudo yum -Uvh mysql80-community-release-el9.1.noarch.rpm
          ech "h2"
