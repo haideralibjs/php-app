@@ -33,7 +33,7 @@ jobs:
       - name: Set MySQL Root Password
         run: |
           TEMP_PASS=$(sudo grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
-          mysql -u root -p"$TEMP_PASS" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL_ROOT_PASSWORD }}';"
+          mysql -u root -p"$TEMP_PASS" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL_PASSWORD }}';"
 
       - name: Verify MySQL installation
         run: |
