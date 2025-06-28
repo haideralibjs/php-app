@@ -13,7 +13,7 @@ jobs:
          sudo yum install -y wget
          sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
          echo "h1"
-         sudo rpm -Uvh mysql80-community-release-el9.1.noarch.rpm
+         sudo rpm -Uvh mysql80-community-release-el9-1.noarch.rpm
          ech "h2"
          sudo yum install -y mysql-community-server
          ech "h3"
