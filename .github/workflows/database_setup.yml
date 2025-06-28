@@ -22,7 +22,7 @@ jobs:
 
       - name: Install MySQL Server
         run: |
-          sudo yum install -y mysql-community-server
+          sudo yum install -y mysql-community-server -y --nogpgcheck
 
       - name: Start & Enable MySQL
         run: |
