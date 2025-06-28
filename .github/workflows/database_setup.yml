@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   install-mysql:
     runs-on: self-hosted
@@ -11,28 +12,29 @@ jobs:
     steps:
       - name: Download MySQL repo RPM
         run: |
-         sudo yum install -y wget
-         sudo wget nc https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
-         sudo rpm -Uvh mysql80-community-release-el9-1.noarch.rpm || true
+          sudo yum install -y wget
+          wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+          sudo rpm -Uvh mysql80-community-release-el9-1.noarch.rpm || true
         
       - name: Import GPG Key
-        run: |    
-         sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
-       
+        run: |
+          sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+
       - name: Install MySQL Server
         run: |
-         sudo yum install -y mysql-community-server
+          sudo yum install -y mysql-community-server
 
       - name: Start & Enable MySQL
         run: |
-         sudo systemctl start mysqld
-         sudo systemctl enable mysqld
-         sleep 5
-         
+          sudo systemctl start mysqld
+          sudo systemctl enable mysqld
+          sleep 5
+
       - name: Set MySQL Root Password
-         TEMP_PASS=$(sudo grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
-         mysql -u root -p"$TEMP_PASS" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL_ROOT_PASSWORD }}';"
-       
+        run: |
+          TEMP_PASS=$(sudo grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
+          mysql -u root -p"$TEMP_PASS" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL_ROOT_PASSWORD }}';"
+
       - name: Verify MySQL installation
         run: |
           mysql -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW DATABASES;"
