@@ -12,11 +12,15 @@ jobs:
         run: |
          sudo yum install -y wget
          wget sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
-         sudo rpm -Uvh mysql80-community-release-el9.1.noarch.rpm
+         echo "h1"
+         sudo yum -Uvh mysql80-community-release-el9.1.noarch.rpm
+         ech "h2"
          sudo yum install -y mysql-community-server
+         ech "h3"
 
          sudo systemctl start mysqld
          sudo systemctl enable mysqld
+         ech "h4"
          sleep 5
          TEMP_PASS=$(sudo grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
          mysql -u root -p"$TEMP_PASS" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL_ROOT_PASSWORD }}';"
