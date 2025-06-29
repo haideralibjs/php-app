@@ -1,4 +1,4 @@
-name: Install and Configure MySQL
+name: Install Laravel App
 
 on:
   push:
