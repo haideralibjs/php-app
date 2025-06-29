@@ -53,20 +53,17 @@ jobs:
          composer global require laravel/installer
          composer --version
          composer install --no-dev --optimize-autoloader
-         
-      - name: Laravel App Build
-        run: |
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
-          nvm install v23
-          echo "Before npm install"
-          npm install --verbose || echo "❌ npm install failed"
-          echo "After npm install"
-          echo "h2"
-          timeout 120s npm run build -- --debug
-          echo "h3" 
+         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+         export NVM_DIR="$HOME/.nvm"
+         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+         nvm install v23
+         echo "Before npm install"
+         npm install || echo "❌ npm install failed"
+         echo "After npm install"
+         echo "h2"
+         timeout 120s npm run build -- --debug
+         echo "h3" 
 
       - name: Database Migrate
         run: |
