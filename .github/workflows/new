@@ -3,7 +3,7 @@ name: Install and Configure MySQL
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   install-mysql:
