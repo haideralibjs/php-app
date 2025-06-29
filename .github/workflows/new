@@ -12,8 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-        
-      - name: Switching To Github WorkSpace
+      - name: Switching To GitHub Workspace
         run: |
           cd ${{ github.workspace }}
           ls -la
@@ -41,12 +40,13 @@ jobs:
           echo "DB_DATABASE=${{ env.DB_DATABASE }}" >> .env
           echo "DB_USERNAME=${{ env.DB_USERNAME }}" >> .env
           echo "DB_PASSWORD=${{ env.DB_PASSWORD }}" >> .env
-        
 
       - name: Setup Node.js
-        uses: actions/setup-node@v
+        uses: actions/setup-node@v4
         with:
           node-version: '23'
+
+      - name: Install Node dependencies and build assets
         run: |
           npm install
           npm run build
