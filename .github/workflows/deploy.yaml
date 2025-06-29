@@ -48,6 +48,7 @@ jobs:
         run: |
          export TERM=xterm
          sudo /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"
+         source ~/.bashrc
          php -v
          sudo composer global require laravel/installer
          composer -V
