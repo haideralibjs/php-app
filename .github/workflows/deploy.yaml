@@ -56,7 +56,7 @@ jobs:
       - name: Laravel App Build
         run: |
           ls -la
-          composer install --no-dev --optimize-autoloader > dev>null 
+          /bin/bash composer install --no-dev --optimize-autoloader
 
       - name: Database Migrate
         run: |
