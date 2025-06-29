@@ -60,9 +60,10 @@ jobs:
          
       - name: Laravel App Build
         run: |
+          cat .env
           npm install
           echo "h2"
-          npm run build > /dev/null 
+          npm run build 
           echo "h3"
 
       - name: Database Migrate
