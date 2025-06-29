@@ -56,7 +56,7 @@ jobs:
       - name: Laravel App Build
         run: |
           export PATH="/usr/local/bin:$PATH"
-          /bin/bash composer install --no-dev --optimize-autoloader
+          composer install --no-dev --optimize-autoloader
 
       - name: Database Migrate
         run: |
