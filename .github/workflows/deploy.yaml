@@ -58,12 +58,9 @@ jobs:
          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
          nvm install v23
-         echo "Before npm install"
-         npm install || echo "❌ npm install failed"
-         echo "After npm install"
-         echo "h2"
-         timeout 120s npm run build -- --debug
-         echo "h3" 
+         npm install
+         npm run build -- --debug
+         echo "h3"
 
       - name: Database Migrate
         run: |
