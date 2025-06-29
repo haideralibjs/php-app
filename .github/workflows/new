@@ -43,7 +43,7 @@ jobs:
           echo "DB_PASSWORD=${{ env.DB_PASSWORD }}" >> .env
         
 
-      - name: 
+      - name: Setup Node.js
         uses: actions/setup-node@v
         with:
           node-version: '23'
