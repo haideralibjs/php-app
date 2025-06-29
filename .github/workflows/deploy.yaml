@@ -1,0 +1,16 @@
+name: Install and Configure MySQL
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install-mysql:
+    runs-on: self-hosted
+
+    steps:
+      - name: Enter Github Workflow
+        run: |
+          cd ${{Github.Workflow}}
+          ls -la
