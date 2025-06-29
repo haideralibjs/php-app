@@ -51,7 +51,8 @@ jobs:
          source ~/.bashrc
          php -v
          sudo composer global require laravel/installer
-         composer -V
+         composer -v
+         
          
    
           
