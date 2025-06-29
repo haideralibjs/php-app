@@ -52,11 +52,12 @@ jobs:
          php -v
          composer global require laravel/installer
          composer --version
+         composer install --no-dev --optimize-autoloader
          
       - name: Laravel App Build
         run: |
-          export PATH="/usr/local/bin:$PATH"
-          composer install --no-dev --optimize-autoloader
+          npm install
+          npm run build
 
       - name: Database Migrate
         run: |
