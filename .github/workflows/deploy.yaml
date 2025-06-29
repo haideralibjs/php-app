@@ -60,11 +60,10 @@ jobs:
           npm run build 
 
       - name: Database Migrate
-         run:|
+        run: |
           php artisan migrate --force
           php artisan config:cache
           php artisan route:cache
-   
           
 
       
