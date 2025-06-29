@@ -15,6 +15,11 @@ jobs:
         
       - name: Switching To Github WorkSpace
         run: |
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+          nvm install v23
           cd ${{ github.workspace }}
           ls -la
 
@@ -23,7 +28,7 @@ jobs:
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          DB_DATABASE: app
           DB_USERNAME: ${{ secrets.MYSQL_USER }}
           DB_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
           APP_KEY: ${{ secrets.APP_KEY }}
@@ -36,7 +41,7 @@ jobs:
           echo "APP_DEBUG=false" >> .env
           echo "DB_CONNECTION=mysql" >> .env
           echo "LOG_CHANNEL=stack" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_HOST=${{ env.DB_HOST }}" >> .env
           echo "DB_PORT=3306" >> .env
           echo "DB_DATABASE=${{ env.DB_DATABASE }}" >> .env
           echo "DB_USERNAME=${{ env.DB_USERNAME }}" >> .env
@@ -55,14 +60,9 @@ jobs:
          
       - name: Laravel App Build
         run: |
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
-          nvm install v23
           npm install
           echo "h2"
-          npm run build > /dev/null 2>&1
+          npm run build > /dev/null 
           echo "h3"
 
       - name: Database Migrate
