@@ -8,8 +8,12 @@ on:
 jobs:
   install-mysql:
     runs-on: self-hosted
-
     steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+        
       - name: Enter Github Workflow
         run: |
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
@@ -19,3 +23,5 @@ jobs:
           nvm install v23
           cd ${{ github.workspace }}
           ls -la
+
+      
