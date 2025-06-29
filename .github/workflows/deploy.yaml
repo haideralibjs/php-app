@@ -53,7 +53,16 @@ jobs:
          composer global require laravel/installer
          composer --version
          
-         
+      - name: Laravel App Build
+        run: |
+          composer install --no-dev --optimize-autoloader
+          npm install
+          npm run build 
+
+      - name: Database Migrate
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
    
           
 
