@@ -8,6 +8,7 @@ on:
 jobs:
   install-mysql:
     runs-on: self-hosted
+    timeout-minutes: 2
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -63,8 +64,8 @@ jobs:
           cat .env
           npm install
           echo "h2"
-          npm run build 
-          echo "h3"
+          npm run build -- --debug
+          echo "h3" 
 
       - name: Database Migrate
         run: |
