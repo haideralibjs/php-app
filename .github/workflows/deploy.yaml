@@ -55,7 +55,7 @@ jobs:
          
       - name: Laravel App Build
         run: |
-          export TERM=xterm
+          ls -la
           composer install --no-dev --optimize-autoloader > dev>null 
 
       - name: Database Migrate
