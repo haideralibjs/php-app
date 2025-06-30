@@ -3,7 +3,7 @@ name: Install and Configure MySQL
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   install-mysql:
@@ -66,6 +66,10 @@ jobs:
            ~/.config/herd-lite/bin/php artisan migrate --force
            ~/.config/herd-lite/bin/php artisan config:cache
            ~/.config/herd-lite/bin/php artisan route:cache
+           
+      - name: Server Setup
+        run: |
+         pm2 start php --name laravel-app -- -S 0.0.0.0:8000 -t public
           
 
       
