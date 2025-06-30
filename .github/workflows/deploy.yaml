@@ -63,9 +63,9 @@ jobs:
 
       - name: Database Migrate
         run: |
-           ~/.config/herd-lite/bin/php php artisan migrate --force
-           ~/.config/herd-lite/bin/php php artisan config:cache
-           ~/.config/herd-lite/bin/php php artisan route:cache
+           ~/.config/herd-lite/bin/php artisan migrate --force
+           ~/.config/herd-lite/bin/php artisan config:cache
+           ~/.config/herd-lite/bin/php artisan route:cache
           
 
       
