@@ -68,7 +68,7 @@ jobs:
            
       - name: Server Setup
         run: |
-         pm2 start php --name laravel-app -- -S 0.0.0.0:8000 -t public
+          php artisan serve --host=0.0.0.0 --port=8000
           
 
       
